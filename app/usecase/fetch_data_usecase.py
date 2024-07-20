@@ -1,10 +1,10 @@
+from app.domain.organization import Organization
+from app.infrastructure.repository import dynamodb_repository
+
 class FetchDataUseCase:
-    def __init__(self, repository):
-        self.repository = repository
+    def __init__(self, dynamodb_repository: dynamodb_repository):
+        self.dynamodb_repository = dynamodb_repository
 
     async def execute(self):
-        response = await self.repository.fetch_data()
-        if response.status_code == 200:
-            pass
-        else:
-            pass
+        organization = await self.dynamodb_repository.fetch_data()
+        return organization
